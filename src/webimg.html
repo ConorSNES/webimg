@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webimg</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="icon" href="favicon.png">
+    <style>
+        .iconbtn {
+            width: min-content;
+            height: min-content;
+            padding: 4px;
+
+            cursor: pointer;
+        }
+
+        .titlerow {
+            display: flex;
+            flex-direction: row;
+            place-content: space-between;
+
+            gap: 4px;
+            
+            width:100%;
+        }
+
+        .highlight-panel {
+            fill: var(--fg-0);
+            stroke: var(--fg-0);
+            color: var(--fg-0);
+            border: 1px solid var(--fg-0);
+            background-color: var(--bg-0);
+            border-radius: 4px;
+        }
+
+        #perpage_ctl {
+            height: min-content;
+            width: 2.8em;
+
+            font-size: 22px;
+        }
+
+        #imglib {
+            min-height: 50vh;
+            min-width: 50vw;
+            padding: 16px;
+            gap: 16px;
+            border-radius: 4px;
+
+            background-color: var(--bg-0);
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            place-content: center;
+
+            >img {
+                max-width: 40vw;
+                width: 256px;
+                object-fit: cover;
+
+                border-radius: 4px;
+            }
+        }
+
+        #pag {
+            display: flex;
+            flex-direction: row;
+            gap: 4px;
+
+            button {
+                cursor: pointer;
+                width: 24px;
+                height: 24px;
+
+                &[disabled] {
+                    opacity: 0.2;
+                    cursor: default;
+                }
+            }
+        }
+    </style>
+    <script>let exports = {};</script>
+    <script src="/webimg.js"></script>
+</head>
+
+<body class="">
+    <main>
+        <div class="titlerow">
+            <h1>webimg</h1>
+            <div class="hbox">
+                <input id="perpage_ctl" class="highlight-panel" type="number" onchange="set_perpage(parseInt(document.getElementById('perpage_ctl').value))" />
+                <button class="iconbtn highlight-panel" onclick="toggledark()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eclipse-icon lucide-eclipse"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="imglib">
+            <div>waiting for fetch..</div>
+        </div>
+        <div id="pag">
+            <button id="pag_start" class="highlight-panel" onclick="first_page()" disabled>&lt;&lt;</button>
+            <button id="pag_back" class="highlight-panel" onclick="prev_page()" disabled>&lt;</button>
+
+            <span id="pag_curr">0</span>
+            <span>/</span>
+            <span id="pag_total">0</span>
+
+            <button id="pag_next" class="highlight-panel" onclick="next_page()" disabled>></button>
+            <button id="pag_end" class="highlight-panel" onclick="last_page()" disabled>>></button>
+        </div>
+    </main>
+</body>
+
+</html>
