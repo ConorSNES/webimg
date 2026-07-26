@@ -46,7 +46,7 @@ function repopulate() {
         const page_end = perpage * (page + 1);
         const registry_view = registry.slice(page_start, page_end);
         for (const v of registry_view) {
-            imglib.innerHTML += `<img src="${v.loc}" />\n`;
+            imglib.innerHTML += `<img src="${v.loc}" alt="host image ${v.hash}" onclick="toggle_fs(this)"/>\n`;
         }
         paginator.start.disabled = page <= 0;
         paginator.back.disabled = page <= 0;
@@ -59,6 +59,9 @@ function repopulate() {
 function assign_repopulate(v) {
     registry = v;
     repopulate();
+}
+function toggle_fs(e) {
+    e.classList.toggle("fs");
 }
 window.onload = () => {
     console.log("Loaded");

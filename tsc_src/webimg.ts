@@ -31,7 +31,8 @@ var paginator : {
 } | null = null;
 
 var registry : {
-    loc: string
+    loc: string,
+    hash: string,
 }[] | null = null;
 
 var registry_meta : {
@@ -69,7 +70,7 @@ function repopulate() {
         const registry_view = registry.slice( page_start, page_end );
 
         for (const v of registry_view) {
-            imglib.innerHTML += `<img src="${v.loc}" />\n`
+            imglib.innerHTML += `<img src="${v.loc}" alt="host image ${v.hash}" onclick="toggle_fs(this)"/>\n`
         }
 
 
@@ -85,6 +86,10 @@ function repopulate() {
 function assign_repopulate(v : typeof registry) {
     registry = v;
     repopulate();
+}
+
+function toggle_fs(e : HTMLElement) {
+    e.classList.toggle("fs");
 }
 
 window.onload = () => {

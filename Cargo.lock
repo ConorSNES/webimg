@@ -1331,6 +1331,8 @@ version = "0.1.0"
 dependencies = [
  "fast-glob",
  "rocket",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
