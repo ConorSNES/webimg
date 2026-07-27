@@ -1,4 +1,4 @@
-use std::{io::stdin, process::exit};
+use std::{io::{Write, stdin, stdout}, process::exit};
 
 use rocket::{
     fs::{FileServer, Options}, http::Status, response::{content, status::Custom},
@@ -56,7 +56,10 @@ fn init() -> _ {
     let images = fetch_images();
     println!("[webimg] Found {} files.", images.len());
     if images.len() == 0 {
-        println!("Continue? [Y/n]");
+        println!("[webimg] Continue?");
+        let mut so = stdout();
+        so.write(b"  [Y/n]: ").expect("stdout not available. aborting");
+        so.flush().unwrap();
         let mut uinput = String::new();
         stdin().read_line(&mut uinput).expect("stdin not available. aborting");
         if uinput.chars().nth(0) != Some('Y') { println!("Aborting."); exit(0); }
