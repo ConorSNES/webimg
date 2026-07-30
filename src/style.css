@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-    padding: 16px 0;
+    padding: 16px 16px;
     background-color: var(--bg-0);
 
     width: fit-content;
@@ -33,8 +33,13 @@ body {
         --fg-1: #d3d3d3;
     }
 
-    * {
-        display: block;
+    @media (width < 900px) {
+        padding: 8px 0;
+        width: 100%;
+        
+        main {
+            border-radius: 0;
+        }
     }
 }
 
@@ -52,7 +57,28 @@ main {
     gap: 8px;
 }
 
-.hbox {
-    display: flex;
-    flex-direction: row;
+table {
+    border-radius: 4px;
+    border-spacing: 0;
+    background-color: var(--bg-0);
+    border: 1px solid var(--fg-0);
+    
+    font-size: 14px;
+
+    td {
+        padding: 4px 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--bg-1);
+    }
+}
+
+input, select {
+    background-color: var(--bg-0);
+    border: 1px solid var(--fg-0);
+    color: var(--fg-0);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
 }

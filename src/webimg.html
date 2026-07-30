@@ -22,8 +22,8 @@
             place-content: space-between;
 
             gap: 4px;
-            
-            width:100%;
+
+            width: 100%;
         }
 
         .highlight-panel {
@@ -37,9 +37,6 @@
 
         #perpage_ctl {
             height: min-content;
-            width: 2.8em;
-
-            font-size: 22px;
         }
 
         #imglib {
@@ -57,9 +54,7 @@
             place-content: center;
 
             >img {
-                max-width: 40vw;
-                width: 256px;
-                object-fit: cover;
+                object-fit: contain;
 
                 border-radius: 4px;
 
@@ -78,12 +73,28 @@
                     backdrop-filter: blur(4px);
                 }
             }
+
+            &.full>img:not(.fs) {
+                width: 80vw;
+            }
+            &.half>img:not(.fs) {
+                width: 40vw;
+            }
+            &.thir>img:not(.fs) {
+                width: 25vw;
+            }
+            &.quar>img:not(.fs) {
+                width: 20vw;
+            }
         }
 
+        #tpag,
         #pag {
             display: flex;
             flex-direction: row;
-            gap: 4px;
+            gap: 8px;
+
+            font-size: 20px;
 
             button {
                 cursor: pointer;
@@ -95,6 +106,12 @@
                     cursor: default;
                 }
             }
+
+            div {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+            }
         }
     </style>
     <script>let exports = {};</script>
@@ -105,27 +122,76 @@
     <main>
         <div class="titlerow">
             <h1>webimg</h1>
-            <div class="hbox">
-                <input id="perpage_ctl" class="highlight-panel" type="number" onchange="set_perpage(parseInt(document.getElementById('perpage_ctl').value))" />
-                <button class="iconbtn highlight-panel" onclick="toggledark()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eclipse-icon lucide-eclipse"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/></svg>
-                </button>
-            </div>
+
+            <button class="iconbtn highlight-panel" onclick="toggledark()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-eclipse-icon lucide-eclipse" style="display: block;">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a7 7 0 1 0 10 10" />
+                </svg>
+            </button>
         </div>
-        <div id="imglib">
+
+        <div id="tpag">
+            <button id="tpag_start" class="highlight-panel" onclick="first_page()" disabled>&lt;&lt;</button>
+            <button id="tpag_back" class="highlight-panel" onclick="prev_page()" disabled>&lt;</button>
+
+            <div>
+                <span id="tpag_curr">0</span>
+                <span>/</span>
+                <span id="tpag_total">0</span>
+            </div>
+
+            <button id="tpag_next" class="highlight-panel" onclick="next_page()" disabled>></button>
+            <button id="tpag_end" class="highlight-panel" onclick="last_page()" disabled>>></button>
+        </div>
+
+        <div id="imglib" class="half">
             <div>waiting for fetch..</div>
         </div>
+
         <div id="pag">
             <button id="pag_start" class="highlight-panel" onclick="first_page()" disabled>&lt;&lt;</button>
             <button id="pag_back" class="highlight-panel" onclick="prev_page()" disabled>&lt;</button>
 
-            <span id="pag_curr">0</span>
-            <span>/</span>
-            <span id="pag_total">0</span>
+            <div>
+                <span id="pag_curr">0</span>
+                <span>/</span>
+                <span id="pag_total">0</span>
+            </div>
 
             <button id="pag_next" class="highlight-panel" onclick="next_page()" disabled>></button>
             <button id="pag_end" class="highlight-panel" onclick="last_page()" disabled>>></button>
         </div>
+
+        <table id="config">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="perpage_ctl">img/page</label>
+                    </td>
+                    <td>
+                        <input name="perpage_ctl" id="perpage_ctl" class="highlight-panel" type="number"
+                            onchange="set_perpage(parseInt(document.getElementById('perpage_ctl').value))" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="img_size_ctl">img size</label>
+                    </td>
+                    <td>
+                        <select name="img_size_ctl" id="img_size_ctl" onchange="set_img_size(document.getElementById('img_size_ctl').value)">
+                            <option value="full">fullwidth</option>
+                            <option value="half">half</option>
+                            <option value="thir">third</option>
+                            <option value="quar">quarter</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
     </main>
 </body>
 

@@ -1,4 +1,4 @@
-use std::{io::{Write, stdin, stdout}, process::exit};
+use std::{io::{Write, stdin, stdout}, net::IpAddr, process::exit};
 
 use rocket::{
     fs::{FileServer, Options}, http::Status, response::{content, status::Custom},
@@ -16,7 +16,9 @@ const WEBUI: &str = include_str!("webimg.html");
 const SCRIPT: &str = include_str!("tsc/webimg.js");
 
 #[get("/")]
-fn base() -> content::RawHtml<String> {
+fn base(client_ip : IpAddr) -> content::RawHtml<String> {
+    // log ip
+    println!("WebUI requested from {}", client_ip);
     content::RawHtml(WEBUI.into())
 }
 
@@ -36,7 +38,10 @@ async fn favicon() -> Custom<Vec<u8>> {
 }
 
 #[get("/files")]
-fn registry() -> content::RawJson<String> {
+fn registry(client_ip : IpAddr) -> content::RawJson<String> {
+    // log ip
+    println!("File registry requested from {}", client_ip);
+
     // find all image files on disk
     let images = fetch_images();
     let strings = transform_paths(images);    
@@ -65,12 +70,16 @@ fn init() -> _ {
         if uinput.chars().nth(0) != Some('Y') { println!("Aborting."); exit(0); }
     }
 
+    println!("[webimg] Start Rocket to serve files...");
+
     // todo: pipe this into fileserver!! security warning!!
     let fs = FileServer::new("./", Options::None);
 
     let figment = rocket::Config::figment()
         .merge(("port", 8080))
-        .merge(("address", "0.0.0.0"));
+        .merge(("address", "0.0.0.0"))
+        .merge(("cli_colors", false));
+
 
     rocket::build()
         .mount("/", routes![base, style, favicon, script, registry])
