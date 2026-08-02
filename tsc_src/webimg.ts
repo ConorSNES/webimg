@@ -25,8 +25,6 @@ function set_img_size(v: string) {
     if (!imglib) return;
     imglib.classList.value = "";
 
-    console.log(`${img_size} ==> ${v}`);
-
     img_size = v;
 
     imglib.classList.add(img_size);
@@ -37,7 +35,7 @@ var paginator: {
         start: HTMLButtonElement;
         back: HTMLButtonElement;
 
-        curr: HTMLSpanElement;
+        curr: HTMLInputElement;
         total: HTMLSpanElement;
 
         next: HTMLButtonElement;
@@ -47,7 +45,7 @@ var paginator: {
         start: HTMLButtonElement;
         back: HTMLButtonElement;
 
-        curr: HTMLSpanElement;
+        curr: HTMLInputElement;
         total: HTMLSpanElement;
 
         next: HTMLButtonElement;
@@ -78,6 +76,8 @@ function repopulate() {
         paginator.bottom.start.disabled = true;
         paginator.top.back.disabled = true;
         paginator.bottom.back.disabled = true;
+        paginator.top.curr.value = page.toString();
+        paginator.bottom.curr.value = page.toString();
         paginator.top.total.innerText = "~";
         paginator.bottom.total.innerText = "~";
         paginator.top.next.disabled = true;
@@ -111,8 +111,10 @@ function repopulate() {
         paginator.bottom.start.disabled = page <= 0;
         paginator.top.back.disabled = page <= 0;
         paginator.bottom.back.disabled = page <= 0;
-        paginator.top.curr.innerText = page as any;
-        paginator.bottom.curr.innerText = page as any;
+        paginator.top.curr.value = page.toString();
+        paginator.top.curr.max = registry_meta.max_page.toString();
+        paginator.bottom.curr.value = page.toString();
+        paginator.bottom.curr.max = registry_meta.max_page.toString();
         paginator.top.total.innerText = registry_meta.max_page as any;
         paginator.bottom.total.innerText = registry_meta.max_page as any;
         paginator.top.end.disabled = page >= registry_meta.max_page;
@@ -144,7 +146,7 @@ window.onload = () => {
             start: document.getElementById("tpag_start") as HTMLButtonElement,
             back: document.getElementById("tpag_back") as HTMLButtonElement,
 
-            curr: document.getElementById("tpag_curr") as HTMLSpanElement,
+            curr: document.getElementById("tpag_curr") as HTMLInputElement,
             total: document.getElementById("tpag_total") as HTMLSpanElement,
 
             next: document.getElementById("tpag_next") as HTMLButtonElement,
@@ -154,7 +156,7 @@ window.onload = () => {
             start: document.getElementById("pag_start") as HTMLButtonElement,
             back: document.getElementById("pag_back") as HTMLButtonElement,
 
-            curr: document.getElementById("pag_curr") as HTMLSpanElement,
+            curr: document.getElementById("pag_curr") as HTMLInputElement,
             total: document.getElementById("pag_total") as HTMLSpanElement,
 
             next: document.getElementById("pag_next") as HTMLButtonElement,

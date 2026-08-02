@@ -23,7 +23,6 @@ function set_img_size(v) {
     if (!imglib)
         return;
     imglib.classList.value = "";
-    console.log(`${img_size} ==> ${v}`);
     img_size = v;
     imglib.classList.add(img_size);
 }
@@ -42,6 +41,8 @@ function repopulate() {
         paginator.bottom.start.disabled = true;
         paginator.top.back.disabled = true;
         paginator.bottom.back.disabled = true;
+        paginator.top.curr.value = page.toString();
+        paginator.bottom.curr.value = page.toString();
         paginator.top.total.innerText = "~";
         paginator.bottom.total.innerText = "~";
         paginator.top.next.disabled = true;
@@ -69,8 +70,10 @@ function repopulate() {
         paginator.bottom.start.disabled = page <= 0;
         paginator.top.back.disabled = page <= 0;
         paginator.bottom.back.disabled = page <= 0;
-        paginator.top.curr.innerText = page;
-        paginator.bottom.curr.innerText = page;
+        paginator.top.curr.value = page.toString();
+        paginator.top.curr.max = registry_meta.max_page.toString();
+        paginator.bottom.curr.value = page.toString();
+        paginator.bottom.curr.max = registry_meta.max_page.toString();
         paginator.top.total.innerText = registry_meta.max_page;
         paginator.bottom.total.innerText = registry_meta.max_page;
         paginator.top.end.disabled = page >= registry_meta.max_page;

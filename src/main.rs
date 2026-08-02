@@ -18,7 +18,7 @@ const SCRIPT: &str = include_str!("tsc/webimg.js");
 #[get("/")]
 fn base(client_ip : IpAddr) -> content::RawHtml<String> {
     // log ip
-    println!("WebUI requested from {}", client_ip);
+    println!("[webimg] WebUI requested from {}", client_ip);
     content::RawHtml(WEBUI.into())
 }
 
@@ -40,7 +40,7 @@ async fn favicon() -> Custom<Vec<u8>> {
 #[get("/files")]
 fn registry(client_ip : IpAddr) -> content::RawJson<String> {
     // log ip
-    println!("File registry requested from {}", client_ip);
+    println!("[webimg] File registry requested from {}", client_ip);
 
     // find all image files on disk
     let images = fetch_images();

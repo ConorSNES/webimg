@@ -6,7 +6,7 @@ Tiny, all-in-one server instance for quickly exposing a directory of images to t
 > Running this program in a directory will (in a read-only sense) expose it to your LAN (or the internet, depending on your setup)! Understand the risks of doing this before running it on a network!
 
 > [!NOTE]
-> No image processing is performed on hosted images (images are served as-is on the host machine)
+> No image processing is performed on hosted images (images are served as-is from the host machine)
 
 ## features
 

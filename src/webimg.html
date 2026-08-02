@@ -77,12 +77,15 @@
             &.full>img:not(.fs) {
                 width: 80vw;
             }
+
             &.half>img:not(.fs) {
                 width: 40vw;
             }
+
             &.thir>img:not(.fs) {
                 width: 25vw;
             }
+
             &.quar>img:not(.fs) {
                 width: 20vw;
             }
@@ -112,6 +115,23 @@
                 flex-direction: row;
                 gap: 4px;
             }
+
+            #pag_curr,
+            #tpag_curr {
+                border: none;
+                width: 2.5em;
+                padding: 4px;
+                text-align: center;
+
+                appearance: textfield;
+                -moz-appearance: textfield;
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                    margin: 0;
+                    -webkit-appearance: none;
+                }
+            }
         }
     </style>
     <script>let exports = {};</script>
@@ -138,7 +158,8 @@
             <button id="tpag_back" class="highlight-panel" onclick="prev_page()" disabled>&lt;</button>
 
             <div>
-                <span id="tpag_curr">0</span>
+                <input type="number" id="tpag_curr" placeholder="0" min=0 step=1
+                    onchange="set_page(parseInt(document.getElementById('tpag_curr').value))" />
                 <span>/</span>
                 <span id="tpag_total">0</span>
             </div>
@@ -156,7 +177,8 @@
             <button id="pag_back" class="highlight-panel" onclick="prev_page()" disabled>&lt;</button>
 
             <div>
-                <span id="pag_curr">0</span>
+                <input type="number" id="pag_curr" placeholder="0" min=0 step=1
+                    onchange="set_page(parseInt(document.getElementById('pag_curr').value))" />
                 <span>/</span>
                 <span id="pag_total">0</span>
             </div>
@@ -181,7 +203,8 @@
                         <label for="img_size_ctl">img size</label>
                     </td>
                     <td>
-                        <select name="img_size_ctl" id="img_size_ctl" onchange="set_img_size(document.getElementById('img_size_ctl').value)">
+                        <select name="img_size_ctl" id="img_size_ctl"
+                            onchange="set_img_size(document.getElementById('img_size_ctl').value)">
                             <option value="full">fullwidth</option>
                             <option value="half">half</option>
                             <option value="thir">third</option>
