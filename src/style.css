@@ -1,6 +1,6 @@
 * {
     margin: 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Open Sans", Geneva, Verdana, sans-serif;
     color: var(--fg-0);
 }
 
@@ -22,7 +22,7 @@ body {
     min-width: 50%;
 
     --bg-0: #f5f5f5;
-    --bg-1: #f0f0f0;
+    --bg-1: #eee;
     --fg-0: #353535;
     --fg-1: #212121;
 
