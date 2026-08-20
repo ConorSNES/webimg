@@ -1,7 +1,10 @@
 # webimg
 
-|||
+|![web ui, light theme](./_screenshots/webui_0.png)|![web ui, dark theme](./_screenshots/webui_1.png)|
 |---|---|
+
+|![terminal logging](./_screenshots/terminal_0.png)|
+|---|
 
 Tiny, all-in-one server instance for quickly exposing a directory of images to the local network via HTML, with a simple integrated gallery.
 
@@ -19,6 +22,7 @@ Produced for of a lack of convenient image previews on other simple http servers
 - Fully portable binary- everything needed is embedded
 - Tiny, simple web image gallery with pagination, dark mode support and some optional configuration
 - Fast and lightweight, with minimal cpu/memory footprint
+- Dark and light theme
 
 ## development/building from source
 
